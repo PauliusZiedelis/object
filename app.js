@@ -66,17 +66,17 @@ class Troleibusas {
   constructor() {
     this.keleiviuSkaicius = 0;
   }
-  static bendrasKeleiviuSkaicius = 0;
+  static visiKeleiviai  = 0;
   ilipa(keleiviuSkaicius) {
     this.keleiviuSkaicius += keleiviuSkaicius;
-    this.bendrasKeleiviuSkaicius += keleiviuSkaicius;
+    this.visiKeleiviai  += keleiviuSkaicius;
   }
   islipa(keleiviuSkaicius) {
     if (this.keleiviuSkaicius - keleiviuSkaicius < 0) {
-      this.bendrasKeleiviuSkaicius - this.keleiviuSkaicius;
+      this.visiKeleiviai  - this.keleiviuSkaicius;
       this.keleiviuSkaicius = 0;
     } else {
-      this.bendrasKeleiviuSkaicius - keleiviuSkaicius;
+      this.visiKeleiviai  - keleiviuSkaicius;
       this.keleiviuSkaicius - keleiviuSkaicius;
     }
   }
@@ -85,7 +85,7 @@ class Troleibusas {
   }
 
   static keleiviuSkaiciusVisuoseTroleibusuose() {
-    console.log(">>>>> Troleibusuose važiuoja: ", this.bendrasKeleiviuSkaicius);
+    console.log(">>>>> Troleibusuose važiuoja: ", this.visiKeleiviai );
   }
 }
 const troleibusas1 = new Troleibusas();
