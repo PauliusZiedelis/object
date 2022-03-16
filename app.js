@@ -12,26 +12,26 @@ function rand(min, max) {
   Sukurti vieną kibiro objektą ir pademonstruoti akmenų rinkimą į kibirą ir rezultatų išvedimą. */
 
 class Kibiras1 {
-  constructor() {
-    this.akmenuKiekis = 0;
-  }
   static visiAkmenys = 0;
-  prideti1Akmeni() {
-    this.akmenuKiekis++;
-    Kibiras1.bendrasAkmenuSkaicius(1);
-  }
-  pridetiDaugAkmenu(kiekis) {
-    this.akmenuKiekis += kiekis;
-    Kibiras1.bendrasAkmenuSkaicius(kiekis);
-  }
-  kiekPririnktaAkmenu() {
-    console.log("Akmeų kibire yra", this.akmenuKiekis);
-  }
   static akmenuSkaiciusVisuoseKibiruose(){
     console.log('Bendras akmenų skaičius viuose kibiruose yra: ', Kibiras1.visiAkmenys);
   }
   static bendrasAkmenuSkaicius(akmenuSkaicius){
-    Kibiras1.visiAkmenys += akmenuSkaicius;
+    this.visiAkmenys += akmenuSkaicius;
+  }
+  constructor() {
+    this.akmenuKiekis = 0;
+  }
+  prideti1Akmeni() {
+    this.akmenuKiekis++;
+    this.constructor.bendrasAkmenuSkaicius(1);
+  }
+  pridetiDaugAkmenu(kiekis) {
+    this.akmenuKiekis += kiekis;
+    this.constructor.bendrasAkmenuSkaicius(kiekis);
+  }
+  kiekPririnktaAkmenu() {
+    console.log("Akmeų kibire yra", this.akmenuKiekis);
   }
 }
 const objBucket = new Kibiras1();
@@ -98,31 +98,31 @@ wallet1.skaiciuoti();
   Atkreipkite dėmesį, kad troleibusu važiuoti neigiamas keleivių skaičius negali. */
 
 class Troleibusas {
+  static visiKeleiviai = 0;
+    static keleiviuSkaiciusVisuoseTroleibusuose() {
+    console.log(">>>>> Troleibusuose važiuoja: ", this.visiKeleiviai);
+  }
+  static bendrasKeleiviuSkaicius(keleiviuSkaicius) {
+    this.visiKeleiviai += keleiviuSkaicius;
+  }
   constructor() {
     this.keleiviuSkaicius = 0;
   }
-  static visiKeleiviai = 0;
   ilipa(keleiviuSkaicius) {
     this.keleiviuSkaicius += keleiviuSkaicius;
-    Troleibusas.bendrasKeleiviuSkaicius(keleiviuSkaicius);
+    this.constructor.bendrasKeleiviuSkaicius(keleiviuSkaicius);
   }
   islipa(keleiviuSkaicius) {
     if (this.keleiviuSkaicius - keleiviuSkaicius < 0) {
-      Troleibusas.bendrasKeleiviuSkaicius(-this.keleiviuSkaicius);
+      this.constructor.bendrasKeleiviuSkaicius(-this.keleiviuSkaicius);
       this.keleiviuSkaicius = 0;
     } else {
-      Troleibusas.bendrasKeleiviuSkaicius(-keleiviuSkaicius);
+      this.constructor.bendrasKeleiviuSkaicius(-keleiviuSkaicius);
       this.keleiviuSkaicius - keleiviuSkaicius;
     }
   }
   vaziuoja() {
     console.log("Troleibuse važiuoja: ", this.keleiviuSkaicius);
-  }
-  static keleiviuSkaiciusVisuoseTroleibusuose() {
-    console.log(">>>>> Troleibusuose važiuoja: ", Troleibusas.visiKeleiviai);
-  }
-  static bendrasKeleiviuSkaicius(keleiviuSkaicius) {
-    Troleibusas.visiKeleiviai += keleiviuSkaicius;
   }
 }
 const troleibusas1 = new Troleibusas();
@@ -294,14 +294,10 @@ function grybauti(){
     const mushroom = new Grybas();
     allMushrooms.push(mushroom);
     basket.deti(mushroom);
-    console.log("a");
   }
   console.log(`Krepšlis pilnas: Jame yra ${basket.mushroomsInBasket.length} grybų, kurių bendras svoris ${basket.prikrauta}`);
   console.log('Krepšelio turinys: ', basket.mushroomsInBasket);
-  console.log('Visi rasti grybai: ', allMushrooms);
+  console.log('Krepšelio turinys', basket.mushroomsInBasket);
 
 }
 grybauti();
-
-
-
